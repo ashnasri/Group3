@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoICT Home Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(to right, #c6ffdd, #fbd786, #DFD0B8);
+        }
+
+        header {
+            background-color: #8E3E63;
+            color: #fff;
+            padding: 10px 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: auto;
+            padding: 0 20px;
+        }
+
+        .logo1 img,
+        .logo2 img {
+            width: 70px;
+            height: auto;
+        }
+
+        .logo1,
+        .logo2 {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo2 img {
+            border-radius: 50%;
+        } 
+
+        .logo1 img {
+            background: white;
+            width: 100px;
+            height: auto;
+        }
+
+        .nav-text {
+            text-align: center;
+            flex-grow: 1;
+            padding: 0 20px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            background: rgba(11, 11, 11, 0.699);
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 2px solid red;
+        }
+
+        .nav-links a:hover {
+            color: #f0eaea;
+            background: #ec0606;
+        }
+
+        .menu-icon {
+            display: none;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: #e088b3;
+            color: #fff;
+            width: 250px;
+            height: 100vh;
+            position: absolute;
+            top: 193 px;
+            border-radius: 5px;
+        }
+
+        .navbar-links {
+            list-style: none;
+            padding: 0;
+        }
+
+        .navbar-links li {
+            width: 100%;
+            text-align: left;
+        }
+
+        .navbar-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            transition: background 0.3s;
+        }
+
+        .navbar-links a i {
+            margin-right: 15px;
+        }
+
+        .navbar-links a:hover {
+            background-color: #575757;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                background-color: #CA8787;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            .nav-links a {
+                font-size: 20px;
+                color: white;
+                text-decoration: none;
+                background: none;
+            }
+
+            .menu-icon {
+                display: block;
+            }
+
+            .sidebar {
+                display: none;
+            }
+        }
+
+        .navbar-2 {
+            background-color: #09dc3e;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .about-dropdown:hover .dropdown-menu,
+        .about-dropdown:focus-within .dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: #fdfbfb; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+            border-radius: 10px;
+            padding: 10px; 
+            z-index: 1000; /* dropdown iko juu ya vipengele vingine */
+            white-space: nowrap; /* Zuia maandishi yasivuke mstari */
+            width: auto; 
+            min-width: 250px; /* Upana wa chini wa maboksi (ongeza hapa) */
+            max-width: 300px; /* Upana wa juu wa maboksi (ongeza hapa) */
+            word-break: break-word; /* Vunja maneno marefu ikiwa inahitajika */
+        }
+
+        .dropdown-menu li {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px;
+            color: black;
+            text-align: center;
+            text-decoration: none;
+            overflow: hidden; 
+            text-overflow: ellipsis; /* Ongeza ellipsis kama maandishi ni marefu sana */
+        }
+
+        .about-dropdown {
+            position: relative; /* Hakikisha dropdown inahusiana na mzazi wake */
+        }
+
+
+        .content {
+            position: relative;
+            width: calc(100% - 250px); /* Adjust width considering the sidebar */
+            margin-left: 250px;
+            height: 500px; /* Adjust height as needed */
+            overflow: hidden;
+        }
+
+        .content video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        .content-text {
+            position: relative;
+            z-index: 1;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin: 20px 0;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: #fbd786;
+        }
+
+        .social-links a {
+            color: #fff;
+            margin: 0 10px;
+            font-size: 20px;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #fbd786;
+        }
+
+        @media (max-width: 768px) {
+            .footer-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .content {
+                width: 100%;
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo1"><img src="images/must-logo.png" alt="MUST Logo"></div>
+            <div class="nav-text">
+                <h3>The United Republic Of Tanzania<br>Ministry of Education, Science and Technology</h3>
+                <h1>MBEYA UNIVERSITY OF SCIENCE AND TECHNOLOGY</h1>
+                <h6>Leading Centre of Excellence for Knowledge, Skills, and Applied Education in Science and Technology</h6>
+            </div>
+            <div class="logo2"><img src="images/tz-logo.jpg" alt="TZ Logo"></div>
+        </nav>
+    </header>
+
+    <nav class="navbar-2">
+        <h1>College Of Information And Communication Technology (CoICT)</h1>
+        <ul class="nav-links">
+            <li><a href="must.ac.tz">Go to MUST Website</a></li>
+           
+            <li class="about-dropdown">
+                <a href="#" class="about-link">Library</a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Overviews</a></li>
+                  <li><a href="#">Our Services</a></li>
+                  <li><a href="#">Guideline</a></li>
+                  <li><a href="#">Resouces</a></li>
+                  <li><a href="#">MUST Repository</a></li>
+                  <li><a href="#">Rules and Reguration</a></li>
+                </ul>
+              </li>
+              <li><a href="contact.html">Contact Us</a></li>
+              <li class="about-dropdown">
+                <a href="#" class="about-link">Admision</a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Admision Info</a></li>
+                  <li><a href="#">How to Apply</a></li>
+                  <li><a href="#">Programmes Offered</a></li>
+                  <li><a href="#">Free Structure</a></li>
+                  <li><a href="#">Online Application System</a></li>
+                </ul>
+              </li>
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="#admision.html">Admission</a></li>
+              <li><a href="#library.html">Library</a></li>
+        </ul>
+    </nav>
+
+    <div class="sidebar">
+        <ul class="navbar-links">
+            <li><a href="index.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+              <li class="about-dropdown">
+                <a href="#" class="about-link"><i class="fas fa-book"></i>CoICT Courses</a>
+                <ul class="dropdown-menu">
+                  <li><a href="telecom.html"></i>Telecommunication Engineering</a></li>
+                  <li><a href="ict.html">Information Communication Technology (ICT)</a></li>
+                  <li><a href="DS_course.html">Engineering in Data Science</a></li>
+                  <li><a href="computerscience.html">Computer Science</a></li>
+                  <li><a href="business.html">Business Computing</a></li>
+                  <li><a href="computer_eng.html">Computer Engineering</a></li>
+                  <li><a href="informatics.html">Informatics</a></li>
+                </ul>
+              </li>
+            <li><a href="#lectures"><i class="fas fa-chalkboard-teacher"></i> Lectures</a></li>
+            <li><a href="#announcements"><i class="fas fa-bullhorn"></i> Announcements</a></li>
+            <li><a href="#announcements"><i class="fas fa-bullhorn"></i> Announcements</a></li>
+            <li><a href="#announcements"><i class="fas fa-bullhorn"></i> Announcements</a></li>
+            <li><a href="#announcements"><i class="fas fa-bullhorn"></i> Announcements</a></li>
+            <li><a href="#announcements"><i class="fas fa-bullhorn"></i> Announcements</a></li>
+
+        </ul>
+    </div>
+
+    <div class="content">
+        <video autoplay muted loop>
+            <source src="images/must2019.mp4" type="video/mp4">
+            Your browser does not support HTML5 video.
+        </video>
+        <div class="content-text">
+            <h1>Welcome to CoICT</h1>
+            <p>Leading Centre of Excellence for Knowledge, Skills, and Applied Education in Science and Technology. <br>
+            Meet with critical web developer David (dpm)</p>
+
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li>Email: coict@.ac.tz</li>
+                    <li>Phone: +255 123 456 789</li>
+                    <li>Address: P.O. Box 131, Mbeya, Tanzania</li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact Us</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <p>&copy; 2024 CoICT. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        }
+    </script>
+</body>
+</html>
